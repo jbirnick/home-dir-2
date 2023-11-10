@@ -1,0 +1,21 @@
+font:
+  normal:
+    family: LiterationMono Nerd Font Mono
+    style: Regular
+
+  italic:
+    family: LiterationMono Nerd Font Mono
+    style: Italic
+
+  bold:
+    family: LiterationMono Nerd Font Mono
+    style: Bold
+
+  bold_italic:
+    family: LiterationMono Nerd Font Mono
+    style: Bold Italic
+
+  size: 11
+
+key_bindings:
+  - { key: Return, mods: Control|Shift, action: SpawnNewInstance }
