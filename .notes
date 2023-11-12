@@ -1,0 +1,5 @@
+/etc/environment contains:
+
+QT_QPA_PLATFORMTHEME="kde"
+KDE_SESSION_VERSION=5
+MOZ_ENABLE_WAYLAND=1
