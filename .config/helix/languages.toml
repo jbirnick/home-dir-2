@@ -1,0 +1,12 @@
+[language-server.typst-lsp]
+command = "typst-lsp"
+config = { exportPdf = "onType" }
+
+[[language]]
+name = "typst"
+scope = "source.typst"
+file-types = ["typ"]
+roots = []
+comment-token = "//"
+indent = { tab-width = 2, unit = "  " }
+language-servers = [ "typst-lsp" ]
