@@ -1,7 +1,3 @@
-[language-server.typst-lsp]
-command = "typst-lsp"
-config = { exportPdf = "onType" }
-
 [[language]]
 name = "typst"
 scope = "source.typst"
@@ -10,3 +6,21 @@ roots = []
 comment-token = "//"
 indent = { tab-width = 2, unit = "  " }
 language-servers = [ "typst-lsp" ]
+
+[language-server.typst-lsp]
+command = "typst-lsp"
+config = { exportPdf = "onType" }
+
+[language-server.rust-analyzer.config]
+check.command = "clippy"
+
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'$' = '$'
+'"' = '"'
+'`' = '`'
+
+[[grammar]]
+name = "typst"

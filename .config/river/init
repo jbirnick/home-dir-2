@@ -188,6 +188,12 @@ riverctl map normal Super F11 enter-mode passthrough
 # Super+F11 to return to normal mode
 riverctl map passthrough Super F11 enter-mode normal
 
+# Alt+{H,J,K,L} for arrow keys
+riverctl map normal Alt H spawn "wtype -k left"
+riverctl map normal Alt J spawn "wtype -k down"
+riverctl map normal Alt K spawn "wtype -k up"
+riverctl map normal Alt L spawn "wtype -k right"
+
 # Various media key mapping examples for both normal and locked mode which do
 # not have a modifier
 for mode in normal locked
@@ -211,6 +217,9 @@ do
     riverctl map $mode None XF86MonBrightnessDown spawn 'brightnessctl set 5%-'
 done
 
+# Screenshot shortcut
+riverctl map normal None Print spawn "slurp | grim -g - - | wl-copy"
+
 # Set background
 riverctl background-color 0x002b36
 
@@ -225,12 +234,8 @@ riverctl border-width 2
 riverctl set-repeat 50 300
 
 # Make certain views start floating
-riverctl float-filter-add app-id float
-riverctl float-filter-add app-id org.kde.dolphin
-riverctl float-filter-add title "popup title with spaces"
-
-# Set app-ids and titles of views which should use client side decorations
-riverctl csd-filter-add app-id "gedit"
+riverctl rule-add -app-id float float
+riverctl rule-add -app-id org.kde.dolphin float
 
 # setup input
 riverctl input pointer-1267-12811-ELAN0688:00_04F3:320B_Touchpad natural-scroll enabled
@@ -239,10 +244,23 @@ riverctl input pointer-1267-12811-ELAN0688:00_04F3:320B_Touchpad tap enabled
 riverctl input pointer-1267-12811-ELAN0688:00_04F3:320B_Touchpad click-method clickfinger
 riverctl input pointer-1267-12811-ELAN0688:00_04F3:320B_Touchpad accel-profile adaptive
 
+riverctl input pointer-9610-4103-SINOWEALTH_Game_Mouse accel-profile flat
+riverctl input pointer-9610-4103-SINOWEALTH_Game_Mouse pointer-accel -0.3
+
+riverctl input pointer-1133-45089-Logitech_Pebble_Mouse accel-profile flat
+riverctl input pointer-1133-45089-Logitech_Pebble_Mouse pointer-accel -0.1
+
 # set keyboard layout
 riverctl keyboard-layout -variant 'altgr-intl' us
 
+# server-side rendering
+riverctl rule-add ssd
+
 # startup applications
+dbus-update-activation-environment --all
+gnome-keyring-daemon --start --components=secrets &
+killall -q wbg
+wbg ~/Wallpapers/switzerland1.jpg &
 killall -q nm-applet
 nm-applet &
 killall -q pasystray
@@ -251,8 +269,8 @@ killall -q blueman-applet
 blueman-applet &
 killall -q waybar
 waybar &
-killall -q fnott
-fnott &
+killall -q dunst
+dunst &
 killall -q wl-paste
 wl-paste --type text --watch cliphist store &
 wl-paste --type image --watch cliphist store &
